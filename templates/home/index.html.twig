@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    {% if mot_rechercher is  defined %}
+    <h1>Rechercher: {{ mot_rechercher  }}</h1>
+    {% endif %}
+    {% if produits|length > 0 %}
+    {% for produit in produits %}
+        
+        <div class="card">
+            <img class ="card-img-top"   src="{{ asset("images/" ~ produit.photo) }}">
+            <div class=" card-body">
+            <p>Réference: {{ produit.reference }}</p>
+            <p>Nom: {{ produit.titre }}</p>
+            <p>Categorie: {{ produit.categorie }}</p>
+            <p>TAille: {{ produit.taille }}</p>
+             <p>Couleur: {{ produit.couleur }}</p>
+            <p>Prix: {{ produit.prix }} €</p>
+            <p>Stock: {{ produit.stock }}</p>
+            <a href="{{ path("produit_show",{id: produit.id}) }} "class="btn btn-primary">Voir </a>
+            <form method ="get" action="{{ path("ajouter_panier",{id: produit.id}) }} ">
+                <input name="qte" type="number">
+                <button>
+            <i class="fa fa-cart-arrow-down"> </i>
+                </button>
+            </form>
+        </div>    
+        </div>
+    {% endfor %}
+    {% else %}
+    <p>votre demande ne retourne aucun resultat</p>
+    {% endif %}
+    
+    
+{% endblock %}

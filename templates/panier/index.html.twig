@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Panier{% endblock %}
+
+{% block body %}
+    <table class="table table-bordered">
+        
+            <thead>
+                <tr>
+                    <td>Photo</td>
+                    <td> ref:</td>
+                    <td> Produit</td>
+                    <td> Quantité</td>
+                    <td> Prix Unitaire</td>
+                    <td> Prix Total</td>
+                    <td> Actions</td>
+                </tr>
+            </thead>
+            
+            {% for ligne in panier %}
+            <tr>
+                <td><img class="img-thumbnail" src="{{ asset("images/" ~ ligne.produit.photo) }}"></td>
+                <td> {{ ligne.produit.reference }}</td>
+                <td> {{ ligne.produit.titre }}</td>
+                <td>
+            <form method="get" action="{{path ("modifier_panier" ,{id: ligne.produit.id})}}">
+                <input type="number" name="qte" value="{{ ligne.qte }}">
+                <button>Modifier Qte</button>
+            </form>
+                </td>
+                <td> {{ ligne.qte }}</td>
+                <td> {{ ligne.produit.prix }}</td>
+                <td> {{ ligne.produit.prix * ligne.qte  }}</td>
+                <td> <a href="{{ path("supprimer_produit_panier", {id:ligne.produit.id}) }}" class="fa fa-trash">vider le panier</a></td>
+                
+            </tr>
+        {% endfor %}
+
+    </table>
+        
+        <a href="{{ path('vider_panier')}}"><input type="button" value="vider le panier" ></a>
+        <a href="{{ path('commander')}}"><input type="button" value="Commander" ></a>
+{% endblock %}

@@ -1,0 +1,16 @@
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import '~bootstrap/scss/bootstrap';
+
+
+body {
+    background-color: chocolate;
+}
+.card-img-top{
+    width: 10%;
+    border: 1px solid royalblue;
+}
+
+.img-thumbnail{
+     width: 25%;
+    border: 1px solid green;
+}
